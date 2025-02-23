@@ -1,0 +1,54 @@
+_BASE_: ../maskdino_R50_bs16_160k_steplr.yaml
+MODEL:
+  META_ARCHITECTURE: "MaskDINO"
+  BACKBONE:
+    NAME: "D2SwinTransformer"
+  SWIN:
+    EMBED_DIM: 192
+    DEPTHS: [2, 2, 18, 2]
+    NUM_HEADS: [6, 12, 24, 48]
+    WINDOW_SIZE: 12
+    APE: False
+    DROP_PATH_RATE: 0.3
+    PATCH_NORM: True
+    PRETRAIN_IMG_SIZE: 384
+  WEIGHTS: "/jilei/hyh_higentec/img_segment/nationRiceProject/MaskDINO-main/PKL/swin_large_patch4_window12_384_22k.pkl"
+  PIXEL_MEAN: [ 123.675, 116.280, 103.530 ]
+  PIXEL_STD: [ 58.395, 57.120, 57.375 ]
+INPUT:
+  MIN_SIZE_TRAIN: !!python/object/apply:eval ["[int(x * 0.1 * 480) for x in range(5, 10)]"] # ["[int(x * 0.1 * 640) for x in range(5, 21)]"]
+  MIN_SIZE_TRAIN_SAMPLING: "choice"
+  MIN_SIZE_TEST: 480
+  MAX_SIZE_TRAIN: 600
+  MAX_SIZE_TEST: 600
+  CROP:
+    ENABLED: True
+    TYPE: "absolute"
+    SIZE: (480, 480)
+    SINGLE_CATEGORY_MAX_AREA: 1.0
+  COLOR_AUG_SSD: True
+  SIZE_DIVISIBILITY: 480  # used in dataset mapper
+  FORMAT: "RGB"
+TEST:
+  EVAL_PERIOD: 5000
+  AUG:
+    ENABLED: False
+    MIN_SIZES: [320, 480, 640, 800, 960, 1120]
+    MAX_SIZE: 4480
+    FLIP: True
+SOLVER:
+  AMP:
+    ENABLED: True
+  BACKBONE_MULTIPLIER: 0.1
+  BASE_LR: 0.0004 # 0.0001
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 5000
+
+  IMS_PER_BATCH: 64 # 128
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 7553 # 3777 # 160000
+
+  STEPS: (182,200) # (91,100) # (135000,150000)
+  WARMUP_FACTOR: 1.0
+  WARMUP_ITERS: 10
+  WARMUP_METHOD: linear
