@@ -11,6 +11,11 @@ We have created a dataset focused on the recognition and segmentation of rice le
 
 ![Architecture Dataest](./figures/dataset.png)
 
+Download:
+通过百度网盘分享的文件：NewDino
+链接：https://pan.baidu.com/s/1Qj3NDJ9dX1d92rYXx8Uh0Q 
+提取码：ep8u
+
 ## Run
 
 | Dependency       | Version  | Installation Command          |
@@ -27,4 +32,4 @@ conda create -n dinor python=3.10 -y
 pip install -r requirements.txt
 
 # 编译C扩展
-python setup.py build_ext --inplace
+python train.py
