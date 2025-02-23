@@ -12,12 +12,19 @@ We have created a dataset focused on the recognition and segmentation of rice le
 ![Architecture Dataest](./figures/dataset.png)
 
 ## Run
-envs can use requirements.txt
-cython
-scipy
-shapely
-timm
-h5py
-submitit
-scikit-image
-opencv-python
+
+| Dependency       | Version  | Installation Command          |
+|------------------|----------|--------------------------------|
+| Cython           | 3.0.8    | `pip install Cython==3.0.8`   |
+| OpenCV           | 4.9.0    | `pip install opencv-python==4.9.0.80` |
+| timm             | 0.9.12   | `pip install timm==0.9.12`    |
+
+```bash
+# 创建conda环境
+conda create -n dinor python=3.10 -y
+
+# 安装核心依赖
+pip install -r requirements.txt
+
+# 编译C扩展
+python setup.py build_ext --inplace
