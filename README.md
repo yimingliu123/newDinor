@@ -31,5 +31,5 @@ conda create -n dinor python=3.10 -y
 # 安装核心依赖
 pip install -r requirements.txt
 
-# 编译C扩展
+# for training the model
 python train.py
