@@ -10,3 +10,14 @@ In the field of rice breeding, enhancing crop yield and quality is paramount. Th
 We have created a dataset focused on the recognition and segmentation of rice leaves and panicles, which includes over 10000 images. Our dataset, as shown in the figure, was captured by drones at three test sites for different rice varieties. The collection process involved shooting at different times of the day (such as morning, noon, and evening) and from various angles and backgrounds of the rice leaves and panicles to ensure the diversity and representativeness of the samples. The actual measured data includes the length and width (angle) of the flag leaf, panicle length, and number of spikelets per panicle. The dataset is divided with 80\% for training and 20\% for testing.
 
 ![Architecture Dataest](./figures/dataset.png)
+
+## Run
+envs can use requirements.txt
+cython
+scipy
+shapely
+timm
+h5py
+submitit
+scikit-image
+opencv-python
